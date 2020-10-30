@@ -13,13 +13,13 @@
         </svg>
     </div>
     <img 
-        src="https://image.tmdb.org/t/p/original/{{image_url}}"
-        alt=""
+        [src]="image_url"
+        alt="Poster Image"
         class="poster-image img-fluid">
     <!-- <div class="bottom-text">Bottom Text</div> -->
     <div class="carousel-caption d-none d-md-block image-details">
-        <p class="detail-title">{{ title }}</p>
-        <p class="detail-genre">{{ genre }}</p>
+        <p class="detail-title">{{title}}</p>
+        <p class="detail-genre">{{genre}}</p>
     </div>
 </div>
 
@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h3>SUMMARY</h3>
-            <p>{{ overview }}</p>
+            <p>{{overview}}</p>
         </div>
     </div>
 
@@ -35,14 +35,12 @@
         <div class="col-md-12 carousel-container">
             <h3>CAST</h3>
             <!-- Image Slider -->
-            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let image of images" class="slide">
-                    <img src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="google(image.name)">
+                    <img loading="lazy" src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)">
                     <span class="actor-name">{{image.name}}</span>
                 </div>
-                <div class='nav-btn next-slide'>Next</div>
             </ngx-slick-carousel>
-    
         </div>
     </div>
 </div>

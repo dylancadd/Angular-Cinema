@@ -17,13 +17,9 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void { 
     this.nav.show();
 
-    JSON.stringify(this.api.initSearch().subscribe(data => {
-      // @ts-ignore
-      this.posters = data.results;
-
-      // @ts-ignore
-      console.log(data.results)
-    }));;
+    this.api.initSearch().subscribe(data => {
+      this.posters = data['results'];
+    });;
 
   }
 
@@ -31,14 +27,12 @@ export class SearchComponent implements OnInit {
     this.header = "";
     if(event.target.value !== "") {
       this.api.apiCall(event.target.value).subscribe(data => {
-        // @ts-ignore
-        this.posters = data.results;
+        this.posters = data['results'];
       });
     } else {
       this.header = "Explore";
       this.api.initSearch().subscribe(data => {
-        // @ts-ignore
-        this.posters = data.results;
+        this.posters = data['results'];
       });
     }
   }

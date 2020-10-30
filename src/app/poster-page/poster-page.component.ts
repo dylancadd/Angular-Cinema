@@ -10,35 +10,34 @@ import { PosterPageApiService } from './poster-page-api.service';
 export class PosterPageComponent implements OnInit {
   poster_id: string = sessionStorage.getItem('poster_id');
   image_url: string;
+  profile_url: string;
 
   title: string;
   genre: string;
   overview: string;
-
   images;
 
   slideConfig = {
     "slidesToShow": 4,
-    "slidesToScroll": 2,
+    "slidesToScroll": 4,
     "nextArrow": "",
     "prevArrow": "",
-    "infinite": true,
+    "infinite": false,
     "responsive": [
       {
         "breakpoint": 1279,
         "settings": {
           "slidesToShow": 3,
-          "slidesToScroll": 1
+          "slidesToScroll": 3
         }
       },
       {
         "breakpoint": 730,
         "settings": {
           "slidesToShow": 2,
-          "slidesToScroll": 1
+          "slidesToScroll": 2
         }
       }
-      
     ]
   };
 
@@ -47,30 +46,16 @@ export class PosterPageComponent implements OnInit {
   ngOnInit(): void {
     this.nav.hide();
 
-    
-
     this.api.getMovieDetails(this.poster_id).subscribe(data => {
-      // @ts-ignore
-      this.image_url = data.backdrop_path;
-      // @ts-ignore
-      this.title = data.title;
-      // @ts-ignore
-      this.genre = data.genres[0].name;
-
-      // @ts-ignore
-      this.overview = data.overview;
-      // console.log(data)
-
+      this.image_url =  `https://image.tmdb.org/t/p/original/${data['backdrop_path']}` ;
+      this.title = data['title'];
+      this.genre = data['genres'][0].name;
+      this.overview = data['overview'];
     });
 
     this.api.getCredits(this.poster_id).subscribe(data => {
-// @ts-ignore
-      this.images = data.cast;
-
-      
-// @ts-ignore
-      console.log(data.cast)
-
+      this.images = data['cast'];
+      this.profile_url = `https://image.tmdb.org/t/p/w200/${data['cast'][0].profile_path}`;
     });
   }
 
@@ -78,12 +63,8 @@ export class PosterPageComponent implements OnInit {
     location.href = '/search';
   }
 
-  slickInit(e) {
-    console.log('initinalized')
-  }
-
-  google(name: string) {
-    window.open(`https://google.com/search?q=${name}`, "_blank");
+  redirectActorPage(actor_id: string) {
+    // Relocate to Actor Page
   }
 
 }
