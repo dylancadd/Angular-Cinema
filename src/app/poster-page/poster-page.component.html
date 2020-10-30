@@ -1,0 +1,51 @@
+
+<div class="container">
+    <div class="carousel-caption d-none d-md-block back-button">
+        <svg 
+            (click)="redirectBack()"
+            class="item-details-header-info-nav__icon wow fadeInLeft" 
+            data-wow-delay=".2s" 
+            data-wow-duration="2s" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 512 512" 
+            style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: fadeInLeft;">
+            <path d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"></path>
+        </svg>
+    </div>
+    <img 
+        src="https://image.tmdb.org/t/p/original/{{image_url}}"
+        alt=""
+        class="poster-image img-fluid">
+    <!-- <div class="bottom-text">Bottom Text</div> -->
+    <div class="carousel-caption d-none d-md-block image-details">
+        <p class="detail-title">{{ title }}</p>
+        <p class="detail-genre">{{ genre }}</p>
+    </div>
+</div>
+
+<div class="container container-summary">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>SUMMARY</h3>
+            <p>{{ overview }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 carousel-container">
+            <h3>CAST</h3>
+            <!-- Image Slider -->
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
+                <div ngxSlickItem *ngFor="let image of images" class="slide">
+                    <img src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="google(image.name)">
+                    <span class="actor-name">{{image.name}}</span>
+                </div>
+                <div class='nav-btn next-slide'>Next</div>
+            </ngx-slick-carousel>
+    
+        </div>
+    </div>
+</div>
+
+
+

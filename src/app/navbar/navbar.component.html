@@ -1,0 +1,28 @@
+<nav class="navbar navbar-inverse" *ngIf="nav.visible">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" (click)="collapsed = !collapsed">
+        <span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
+        </button>
+        <a routerLink="/" class="navbar-brand"><img class="logo" src="assets/logo.jpg" alt="bruh"></a>
+      </div>
+      <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
+        <ul class="nav navbar-nav">
+          <li><a routerLink="/discover">Discover</a></li>
+          <li><a href="#" routerLink="/movies">Movies</a></li>
+          <li><a href="#" routerLink="/tv-shows">TV Shows</a></li>
+          <li><a href="#" routerLink="/latest">Latest</a></li>
+          <li><a href="#" routerLink="/search">Search</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a>Manage<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Save</a></li>
+              <li><a href="#">Delete</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
