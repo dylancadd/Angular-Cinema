@@ -9,7 +9,6 @@ input {
     letter-spacing: 1.17px;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     text-shadow: none;
-    outline: red;
     border-radius: none;
     width: 100%;
 
@@ -40,6 +39,7 @@ input {
 
 .container {
     margin-top: 10px;
+    color: white;
 }
 
 .centered {

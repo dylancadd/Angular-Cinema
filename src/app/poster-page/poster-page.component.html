@@ -12,7 +12,7 @@
             <path d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"></path>
         </svg>
     </div>
-    <img 
+    <img
         [src]="image_url"
         alt="Poster Image"
         class="poster-image img-fluid">
@@ -28,6 +28,7 @@
         <div class="col-xs-12">
             <h3>SUMMARY</h3>
             <p>{{overview}}</p>
+            <ng-template *ngIf="overview !== ''">No Summary Provided</ng-template>
         </div>
     </div>
 
@@ -37,7 +38,10 @@
             <!-- Image Slider -->
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let image of images" class="slide">
-                    <img loading="lazy" src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)">
+                    <img *ngIf="image.profile_path !== null; else blankProfile" loading="lazy" src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)">
+                    <ng-template #blankProfile>
+                        <img loading="lazy" src="/assets/gradient-blue.jpg" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)" style="width: 228px; height: 328px">
+                    </ng-template>
                     <span class="actor-name">{{image.name}}</span>
                 </div>
             </ngx-slick-carousel>

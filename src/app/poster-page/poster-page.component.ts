@@ -47,15 +47,26 @@ export class PosterPageComponent implements OnInit {
     this.nav.hide();
 
     this.api.getMovieDetails(this.poster_id).subscribe(data => {
-      this.image_url =  `https://image.tmdb.org/t/p/original/${data['backdrop_path']}` ;
-      this.title = data['title'];
-      this.genre = data['genres'][0].name;
+
+      if(data['backdrop_path'] !== null) {
+        this.image_url = `https://image.tmdb.org/t/p/original/${data['backdrop_path']}`;
+      } else {
+        this.image_url = '/assets/gradient-blue.jpg';
+      }
+
+      if(data['genres'].length > 0) {
+        this.genre = data['genres'][0].name;
+      } else {
+        this.genre = "No Genre Found";
+      }
+
       this.overview = data['overview'];
+      this.title = data['title'];
     });
 
     this.api.getCredits(this.poster_id).subscribe(data => {
       this.images = data['cast'];
-      this.profile_url = `https://image.tmdb.org/t/p/w200/${data['cast'][0].profile_path}`;
+      console.log(this.images)
     });
   }
 
