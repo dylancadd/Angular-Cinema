@@ -37,13 +37,21 @@
             <h3>CAST</h3>
             <!-- Image Slider -->
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                <div ngxSlickItem *ngFor="let image of images" class="slide">
-                    <img *ngIf="image.profile_path !== null; else blankProfile" loading="lazy" src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)">
-                    <ng-template #blankProfile>
-                        <img loading="lazy" src="/assets/gradient-blue.jpg" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)" style="width: 228px; height: 328px">
-                    </ng-template>
-                    <span class="actor-name">{{image.name}}</span>
-                </div>
+
+                <span *ngIf="images === 'undefined'; else blankCast">
+                    <div ngxSlickItem *ngFor="let image of images" class="slide">
+                        <img *ngIf="image.profile_path !== null; else blankProfile" loading="lazy" src="https://image.tmdb.org/t/p/w200/{{image.profile_path}}" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)">
+                        <ng-template #blankProfile>
+                            <img loading="lazy" src="/assets/gradient-blue.jpg" title="{{image.name}}"alt="Image" class="img-response" (click)="redirectActorPage(image.id)" style="width: 228px; height: 328px">
+                        </ng-template>
+                        <span class="actor-name">{{image.name}}</span>
+                    </div>
+                </span>
+
+                <ng-template #blankCast>
+                    <p>No Cast Available</p>
+                </ng-template>
+                
             </ngx-slick-carousel>
         </div>
     </div>
