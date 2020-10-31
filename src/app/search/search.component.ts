@@ -41,7 +41,9 @@ export class SearchComponent implements OnInit {
   }
 
   redirectPoster(poster_id) {
-    sessionStorage.setItem('poster_id', poster_id);
-    location.href = '/poster-page';
+    setTimeout(() => {
+      sessionStorage.setItem('poster_id', poster_id);
+      location.href = '/poster-page';
+    }, 250)
   }
 }
