@@ -24,7 +24,8 @@ export class SearchComponent implements OnInit {
   }
 
   search(event) {
-    this.header = "";
+    setTimeout(() => {
+      this.header = "";
     if(event.target.value !== "") {
       this.api.apiCall(event.target.value).subscribe(data => {
         this.posters = data['results'];
@@ -35,6 +36,8 @@ export class SearchComponent implements OnInit {
         this.posters = data['results'];
       });
     }
+    }, 1000)
+  
   }
 
   redirectPoster(poster_id) {

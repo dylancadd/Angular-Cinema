@@ -49,6 +49,8 @@ export class PosterPageComponent implements OnInit {
 
     this.api.getMovieDetails(this.poster_id).subscribe(data => {
 
+      console.log(data)
+
       if(data['backdrop_path'] !== null) {
         this.image_url = `https://image.tmdb.org/t/p/original/${data['backdrop_path']}`;
       } else {
@@ -74,7 +76,6 @@ export class PosterPageComponent implements OnInit {
       }
 
       this.images = data['cast'];
-      console.log(this.images)
     });
   }
 
