@@ -16,6 +16,7 @@ export class PosterPageComponent implements OnInit {
   genre: string;
   overview: string;
   images;
+  castAvailable;
 
   slideConfig = {
     "slidesToShow": 4,
@@ -65,6 +66,13 @@ export class PosterPageComponent implements OnInit {
     });
 
     this.api.getCredits(this.poster_id).subscribe(data => {
+
+      if(data['cast']. length !== 0) {
+        this.castAvailable = true;
+      } else {
+        this.castAvailable = false;
+      }
+
       this.images = data['cast'];
       console.log(this.images)
     });
